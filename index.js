@@ -15,10 +15,12 @@ export default Procedure(
 				if (typeof cmds === "function")
 					cmds(...args);
 				else {
-					const cmd = args.shift();
-					if (cmd && cmds[cmd])
-						cmds[cmd].apply(this, args);
-					else
+					let cmd = args.shift();
+					if (cmd && cmds[cmd]) {
+						const out = cmds[cmd].apply(this, args);
+						if (out)
+							this.render(out);
+					} else
 						this.error(`command "${cmd}" not found.`);
 				}
 			}
