@@ -17,7 +17,7 @@ export default Procedure(
 				else {
 					const cmd = args.shift();
 					if (cmd && cmds[cmd])
-						cmds[cmd](...args);
+						cmds[cmd].apply(this, args);
 					else
 						this.error(`command "${cmd}" not found.`);
 				}
