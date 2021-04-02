@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/SKYCRATE-ltd/termite#readme",
   "dependencies": {
+    "computer": "github:SKYCRATE-ltd/computer",
     "zed": "github:SKYCRATE-ltd/zed"
   }
 }
