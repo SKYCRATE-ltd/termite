@@ -18,6 +18,7 @@ export default Procedure(
 					let cmd = args.shift();
 					if (cmd && cmds[cmd]) {
 						const out = cmds[cmd].apply(this, args);
+						console.log(out);
 						if (out)
 							this.render(out);
 					} else
