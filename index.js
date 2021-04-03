@@ -16,9 +16,9 @@ export default Procedure(
 					out = cmds.apply(this, args);
 				else {
 					let cmd = args.shift();
-					if (!cmd) {
-						out = Object.values(cmds)[0].call(this);
-					} else if (cmds[cmd]) {
+					if (!cmd && cmds["@default"])
+						out = cmds["@default"].call(this);
+					else if (cmds[cmd]) {
 						cmds["@init"] && cmds["@init"].call(this, cmd, ...args);
 						out = cmds[cmd].apply(this, args);
 						cmds["@exit"] && cmds["@exit"].call(this, cmd, ...args);
