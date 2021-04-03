@@ -29,7 +29,7 @@ export default Procedure(
 			console.log(msg);
 		},
 		error(msg) {
-			this.render(`🚨 ERROR: ${msg}`);
+			this.render(`💔 ERROR: ${msg}`);
 		}
 	},
 );
