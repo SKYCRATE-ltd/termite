@@ -23,11 +23,9 @@ export default Procedure(
 								this.pass(cmd, ...args) ||
 									this.pass("@exit", cmd, ...args);
 					} else
-						this.error(`command "${cmd}" not found.`);
+						out = this.error(`command "${cmd}" not found.`);
 				}
-				if (out) {
-					this.render(out);
-				}
+				this.render(out);
 			}
 		},
 		render(msg) {
