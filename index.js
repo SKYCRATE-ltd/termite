@@ -16,20 +16,17 @@ export default Procedure(
 					out = cmds.apply(this, args);
 				else {
 					let cmd = args.shift();
-					if (!cmd && cmds["@default"])
-						out = cmds["@default"].call(this);
+					if (!cmd)
+						out = this.pass("@default");
 					else if (cmds[cmd]) {
-						if (cmds["@init"])
-							out = cmds["@init"].call(this, cmd, ...args);
-						if (!out)
-							out = cmds[cmd].apply(this, args);
-						if (out && cmds["@exit"])
-							cmds["@exit"].call(this, cmd, ...args);
+						out = this.pass("@init", cmd, ...args) || this.pass(cmd, ...args);
 					} else
 						this.error(`command "${cmd}" not found.`);
 				}
-				if (out)
+				if (out) {
+					this.pass("@exit", ...args);
 					this.render(out);
+				}
 			}
 		},
 		render(msg) {
@@ -38,6 +35,12 @@ export default Procedure(
 		},
 		error(msg) {
 			this.render(`💔 ERROR: ${msg}`);
+		},
+		next() {
+			// TODO: Implement
+		},
+		pass(cmd, ...args) {
+			return this.__[cmd] && this.__[cmd].apply(this, args)
 		}
 	},
 );
