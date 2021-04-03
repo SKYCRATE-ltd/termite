@@ -1,5 +1,5 @@
 import {
-	Procedure
+	Procedure, Any
 } from "zed";
 
 // A singleton. Creates a custom Type then returns that instance
@@ -7,7 +7,9 @@ import {
 export default Procedure(
 	'Program',
 	{
+		__: Any,
 		init(cmds) {
+			this.__ = cmds;
 			return (...args) => {
 				let out;
 				if (typeof cmds === "function")
@@ -17,7 +19,9 @@ export default Procedure(
 					if (!cmd) {
 						out = Object.values(cmds)[0].call(this);
 					} else if (cmds[cmd]) {
+						cmds["@init"] && cmds["@init"].call(this, cmd, ...args);
 						out = cmds[cmd].apply(this, args);
+						cmds["@exit"] && cmds["@exit"].call(this, cmd, ...args);
 					} else
 						this.error(`command "${cmd}" not found.`);
 				}
