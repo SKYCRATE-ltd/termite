@@ -19,9 +19,9 @@ export default Procedure(
 					if (!cmd)
 						out = this.pass("@default");
 					else if (cmds[cmd]) {
-						out = this.pass("@init", cmd, ...args) || this.pass(cmd, ...args);
-						if (out)
-							this.pass("@exit", cmd, ...args);
+						out = this.pass("@init", cmd, ...args) ||
+								this.pass(cmd, ...args) ||
+									this.pass("@exit", cmd, ...args);
 					} else
 						this.error(`command "${cmd}" not found.`);
 				}
