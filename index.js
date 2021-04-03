@@ -34,6 +34,7 @@ export default Procedure(
 		},
 		render(msg) {
 			console.log(msg);
+			return msg;
 		},
 		error(msg) {
 			this.render(`💔 ERROR: ${msg}`);
