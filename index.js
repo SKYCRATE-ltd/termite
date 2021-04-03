@@ -19,9 +19,12 @@ export default Procedure(
 					if (!cmd && cmds["@default"])
 						out = cmds["@default"].call(this);
 					else if (cmds[cmd]) {
-						cmds["@init"] && cmds["@init"].call(this, cmd, ...args);
-						out = cmds[cmd].apply(this, args);
-						cmds["@exit"] && cmds["@exit"].call(this, cmd, ...args);
+						if (cmds["@init"])
+							out = cmds["@init"].call(this, cmd, ...args);
+						if (!out)
+							out = cmds[cmd].apply(this, args);
+						if (out && cmds["@exit"])
+							cmds["@exit"].call(this, cmd, ...args);
 					} else
 						this.error(`command "${cmd}" not found.`);
 				}
