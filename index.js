@@ -35,7 +35,7 @@ export default Procedure(
 			return msg;
 		},
 		error(msg) {
-			this.render(`💔 ERROR: ${msg}`);
+			return this.render(`💔 ERROR: ${msg}`);
 		},
 		next() {
 			// TODO: Implement
