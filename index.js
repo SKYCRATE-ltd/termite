@@ -9,27 +9,27 @@ export default Procedure(
 	{
 		init(cmds) {
 			return (...args) => {
-				if (args.length === 0)
-					args = process.argv.slice(2);
-				
+				let out;
 				if (typeof cmds === "function")
-					cmds(...args);
+					out = cmds.apply(this, args);
 				else {
 					let cmd = args.shift();
-					if (cmd && cmds[cmd]) {
-						const out = cmds[cmd].apply(this, args);
-						if (out)
-							this.render(out);
+					if (!cmd) {
+						out = Object.values(cmds)[0].call(this);
+					} else if (cmds[cmd]) {
+						out = cmds[cmd].apply(this, args);
 					} else
 						this.error(`command "${cmd}" not found.`);
 				}
+				if (out)
+					this.render(out);
 			}
 		},
 		render(msg) {
 			console.log(msg);
 		},
 		error(msg) {
-			this.render(`ERROR: ${msg}`);
+			this.render(`🚨 ERROR: ${msg}`);
 		}
 	},
 );
