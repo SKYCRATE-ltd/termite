@@ -38,19 +38,22 @@ export default Procedure(
 			console[type](msg);
 			return msg;
 		},
-		log(msg) {
+		log(msg = 'log') {
 			return this.println(` - ${msg}`);
 		},
-		info(msg) {
+		info(msg = 'info') {
 			return this.println(`🛈 ${msg}`);
 		},
-		warn(msg) {
+		warn(msg = ':S') {
 			return this.println(`⚡ ${msg}`, 'warn');
 		},
-		error(msg) {
+		error(msg = ':(') {
 			return this.println(`💔 ERROR: ${msg}`, 'error');
 		},
-		debug(msg) {
+		done(msg = '') {
+			return this.println(`✔ DONE ${msg}`);
+		},
+		debug(msg = 'here!') {
 			return this.println(`🐛 ${msg}`, 'debug');
 		},
 		hr(char = '∙', size = 40) {
