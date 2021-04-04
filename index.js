@@ -29,12 +29,14 @@ export default Procedure(
 				}
 			}
 		},
-		print(msg, type = 'log') {
-			console[type](msg);
+		print(msg) {
+			process.stdout.write(msg);
 			return msg;
 		},
 		println(msg, type = 'log') {
-			return this.print(msg + EOL, type);
+			// return this.print(msg + EOL, type);
+			console[type](msg);
+			return msg;
 		},
 		log(msg) {
 			return this.println(` - ${msg}`);
@@ -58,7 +60,7 @@ export default Procedure(
 			return this.println(title) + this.hr();
 		},
 		list(items) {
-			return this.print(items.map(item => ` • ${item}`).join(EOL));
+			return this.println(items.map(item => ` • ${item}`).join(EOL));
 		},
 		next() {
 			// TODO: Implement
