@@ -57,7 +57,7 @@ export default Procedure(
 		header(title) {
 			return this.println(title) + this.hr();
 		},
-		list(...items) {
+		list(items) {
 			return this.print(items.map(item => ` • ${item}`).join(EOL));
 		},
 		next() {
