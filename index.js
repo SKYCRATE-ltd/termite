@@ -63,7 +63,7 @@ export default Procedure(
 			return this.println(msg);
 		},
 		header(title) {
-			return this.println(title) + this.hr();
+			return this.println(`∙ ${title}`) + this.hr();
 		},
 		list(items) {
 			return this.println(items.map(item => ` • ${item}`).join(EOL));
