@@ -41,6 +41,9 @@ export default Procedure(
 		log(msg) {
 			return this.println(` - ${msg}`);
 		},
+		info(msg) {
+			return this.println(`🛈 ${msg}`);
+		},
 		warn(msg) {
 			return this.println(`⚡ ${msg}`, 'warn');
 		},
