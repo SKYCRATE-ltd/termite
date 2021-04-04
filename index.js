@@ -53,7 +53,7 @@ export default Procedure(
 		debug(msg) {
 			return this.println(`🐛 ${msg}`, 'debug');
 		},
-		hr(char = '-', size = 40) {
+		hr(char = '∙', size = 40) {
 			let msg = '';
 			for (let i = 0; i < size; i++)
 				msg += char;
