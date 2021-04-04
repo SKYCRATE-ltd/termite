@@ -56,14 +56,14 @@ export default Procedure(
 		debug(msg = 'here!') {
 			return this.println(`🐛 ${msg}`, 'debug');
 		},
-		hr(char = '𝄈', size = 40) {
+		hr(char = '•', size = 40) {
 			let msg = '';
 			for (let i = 0; i < size; i++)
 				msg += char;
 			return this.println(msg);
 		},
 		header(title) {
-			return this.hr() + this.println(`∙ ${title}`) + this.hr();
+			return this.hr() + this.println(`• ${title}`) + this.hr();
 		},
 		list(items) {
 			return this.println(items.map(item => ` • ${item}`).join(EOL));
